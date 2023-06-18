@@ -25,6 +25,10 @@ public class PersonInfoController {
 	public void getAllPersonInfo() {
 		infoService.getAllPersonInfo();
 	}
+	
+	public void count() {
+		infoService.count();
+	}
 
 	public void updatePersonName(int id, String name) {
 		infoService.updatePersonName(id, name);

@@ -21,6 +21,8 @@ public interface PersonInfoRepository {
 	
 	public PersonInfo getPersonInfo(int id);
 	
+	public List<Integer> count();
+	
 	public List<PersonInfo> getAllPersonInfo();
 	
 	

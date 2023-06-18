@@ -1,9 +1,13 @@
 package com.ripplestreet.userdetailshibernate.main;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import com.ripplestreet.userdetailshibernate.controller.AdressController;
 import com.ripplestreet.userdetailshibernate.controller.PersonInfoController;
+import com.ripplestreet.userdetailshibernate.dto.Adress;
 import com.ripplestreet.userdetailshibernate.dto.PersonInfo;
 
 
@@ -11,7 +15,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		PersonInfoController controller = new PersonInfoController();
-		
+		AdressController adressController = new AdressController();
 		Scanner sc = new Scanner(System.in);
 
 		for(;;) {
@@ -24,6 +28,8 @@ public class Main {
 			System.out.println("enter 6 to update person dob");
 			System.out.println("enter 7 to get all person details");
 			System.out.println("enter 8 to delete person info");
+			System.out.println("enter 9 to add new adress");
+			System.out.println("enter 10 to get count of person record");
 			System.out.println("enter c to close");
 			String key = sc.next();
 			switch (key) {
@@ -46,7 +52,19 @@ public class Main {
 					System.out.println("enter day of birth");
 					int day = sc.nextInt();
 					Date dob = new Date(year, month, day);
-					PersonInfo info =new PersonInfo(name, email, phone, dob);
+					System.out.println("enter adress type");
+					String adress_type = sc.next();
+					System.out.println("enter street");
+					String street = sc.next();
+					System.out.println("enter city");
+					String city = sc.next();
+					System.out.println("enter pincode");
+					int pincode = sc.nextInt();
+					List<Adress> adresses = new ArrayList<>();
+					Adress adress = new Adress(adress_type, street, city, pincode, null);
+					adresses.add(adress);
+					PersonInfo info = new PersonInfo(name, email, phone, dob, adresses);
+					adress.setInfo(info);
 					controller.savePersonInfo(info);
 					break;
 				}
@@ -150,6 +168,42 @@ public class Main {
 					break;
 				}
 				else break;
+			}
+			
+			case "9" : {
+				System.out.println("do you want to add new adress? y/n");
+				String option  =sc.next();
+				if(option.equalsIgnoreCase("y")) {
+					System.out.println("enter person id to enter new adress");
+					int personId = sc.nextInt();
+					System.out.println("enter adress type");
+					String adress_type = sc.next();
+					System.out.println("enter street");
+					String street = sc.next();
+					System.out.println("enter city");
+					String city = sc.next();
+					System.out.println("enter pincode");
+					int pincode = sc.nextInt();
+					adressController.saveAdress(personId, adress_type, street, city, pincode);
+					break;
+				}
+				else break;
+				
+				
+				
+			}
+			
+			case "10" : {
+				System.out.println("do you want to get count of person? y/n");
+				String option  =sc.next();
+				if(option.equalsIgnoreCase("y")) {
+					controller.count();
+					break;
+				}
+				else break;
+				
+				
+				
 			}
 			
 			case "c" : {

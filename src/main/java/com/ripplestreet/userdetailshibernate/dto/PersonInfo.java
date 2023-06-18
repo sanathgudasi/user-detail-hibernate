@@ -1,12 +1,17 @@
 package com.ripplestreet.userdetailshibernate.dto;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class PersonInfo {
@@ -22,29 +27,26 @@ public class PersonInfo {
 	@Column(nullable = false)
 	private Date dob;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Adress> adresses;
+	
 	
 	public PersonInfo() {
 		super();
 	}
 
-	
-	public PersonInfo(String name, String email, long phone, Date dob) {
+
+	public PersonInfo(String name, String email, long phone, Date dob, List<Adress> adresses) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.dob = dob;
+		this.adresses = adresses;
 	}
 
 
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 
 	public String getName() {
@@ -87,11 +89,24 @@ public class PersonInfo {
 	}
 
 
+	public List<Adress> getAdresses() {
+		return adresses;
+	}
+
+
+	public void setAdresses(List<Adress> adresses) {
+		this.adresses = adresses;
+	}
+
+
 	@Override
 	public String toString() {
 		return "PersonInfo [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + ", dob=" + dob
-				+ "]";
+				+ ", adresses=" + adresses + "]";
 	}
+	
+	
+
 	
 	
 	

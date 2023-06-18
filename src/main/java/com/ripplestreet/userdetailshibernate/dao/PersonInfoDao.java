@@ -44,6 +44,15 @@ public class PersonInfoDao implements PersonInfoRepository {
 		factory.close();
 	}
 
+	public List<Integer> count() {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("user_details");
+		EntityManager manager = factory.createEntityManager();
+		Query query = manager.createQuery("select count(p) from PersonInfo p");
+		List<Integer> li =query.getResultList();
+
+		return  li;
+	}
+
 	@Override
 	public PersonInfo getPersonInfo(int id) {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("user_details");
@@ -124,7 +133,7 @@ public class PersonInfoDao implements PersonInfoRepository {
 			System.out.println("updated");
 			manager.close();
 			factory.close();
-			
+
 		}
 	}
 
@@ -147,7 +156,7 @@ public class PersonInfoDao implements PersonInfoRepository {
 			System.out.println("updated");
 			manager.close();
 			factory.close();
-					}
+		}
 	}
 
 	@Override
@@ -168,7 +177,7 @@ public class PersonInfoDao implements PersonInfoRepository {
 			System.out.println("updated");
 			manager.close();
 			factory.close();
-			
+
 		}
 	}
 

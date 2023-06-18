@@ -19,6 +19,10 @@ public class PersonInfoService {
 	public void deletePersonInfo(int id) {
 		infoDao.deletePersonInfo(id);
 	}
+	
+	public void count() {
+		System.out.println("total number of person records : "+ infoDao.count());
+	}
 
 	public void getPersonInfo(int id) {
 		PersonInfo info =  infoDao.getPersonInfo(id);
